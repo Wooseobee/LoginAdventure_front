@@ -1,0 +1,88 @@
+.planLi:hover {
+    background-color: #eff7ff;
+  }
+  
+  .planList {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .planList > li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 18px;
+    margin: 0 -18px;
+    cursor: pointer;
+  }
+  
+  .planTitle {
+    font-size: 16px;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  
+  .planTerm {
+    font-size: 12px;
+    line-height: 17px;
+    display: inline-block;
+    margin: 4px 4px 0 0;
+    padding: 0 3px;
+    letter-spacing: -0.5px;
+    color: #666;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+  
+  .planText {
+    font-size: 13px;
+    letter-spacing: -0.5px;
+    color: #555;
+  }
+  
+  .addPlanBtnContainer {
+    position: fixed;
+    left: 320px;
+    bottom: 40px;
+    z-index: 1000;
+  }
+  
+  .addPlanBtn {
+    font-size: 60px;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 4px 12px;
+  }
+  
+  .planViewBody {
+    padding: 20px;
+  }
+  
+  .planHeader {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(176, 174, 174);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .planHeader > div {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    align-items: end;
+  }
+  
+  .planHeader > div > span:last-child {
+    color: gray;
+    font-size: 12px;
+  }
+  .tripContent {
+    padding: 10px 0;
+    font-size: 14px;
+  }
+  
+  .edit-btn {
+    display: inline-block;
+    border: 3px solid #5085bb;
+    padding: 4px;
+    border-radius: 3px;
+    margin-left: auto;
+  }
+  

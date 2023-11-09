@@ -1,0 +1,142 @@
+
+
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .nav-menu {
+    margin-right: 10px;
+  }
+  
+  .content-user-list h1 {
+    text-align: center;
+  }
+  
+  .login-page {
+    width: 360px;
+    padding: 7% 0 0;
+    margin: auto;
+  }
+  
+  .form {
+   margin-top:40px;
+  }
+  
+  .form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  .form textarea {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    resize: none;
+  }
+  
+  .form  button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: var(--main);
+    width: 94%;
+    margin: 0 0 15px;
+    border: 0;
+    padding: 15px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .form button:hover,
+  .form button:active,
+  .form button:focus {
+    background: #1166DD;
+  }
+  .form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+  }
+  .form .message a {
+    color: #19CE60;
+    text-decoration: none;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    margin: 0 auto;
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 70px;
+  }
+  
+  .content-user-list-ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .list-item {
+    margin: 10px;
+  }
+  
+  .user-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .btnWrap {
+    width: 500px;
+    margin: 100px auto;
+  }
+  .popupBtn {
+    width: 150px;
+    height: 50px;
+    padding: 10px 5px;
+  }
+  .modalWrap {
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none;
+  }
+  
+  .modalBody {
+    width: 500px;
+  
+    padding: 30px 30px;
+    margin: 0 auto;
+    border: 1px solid #777;
+    background-color: #fff;
+  }
+  
+  .closeBtn {
+    float:right;
+    font-weight: bold;
+    color: #777;
+    font-size:25px;
+    cursor: pointer;
+  }
