@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { getCookie } from "@/assets/js/util/cookie.js"
+import { setCookie, getCookie, deleteCookie } from "@/assets/js/util/cookie.js"
 import { signup, login, logout } from "@/api/user.js"
 const id = ref(getCookie("id"));
 const signupId = ref("");
@@ -72,6 +72,8 @@ const loginUser = () => {
             body,
             ({ data }) => {
                 console.log(data);
+                setCookie('id', body.userid);
+                closeLoginBtn();
             },
             (err) => {
                 console.log(err);
