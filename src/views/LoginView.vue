@@ -1,15 +1,12 @@
 <script setup>
 import { ref } from 'vue';
 import { getCookie } from "@/assets/js/util/cookie.js"
+import { signup, login, logout } from "@/api/user.js"
 const id = ref(getCookie("id"));
-
-const login = () => {
-
-}
-
-const logout = () => {
-
-}
+const signupId = ref("");
+const signupPw = ref("");
+const signupName = ref("");
+const signupRrn = ref("");
 
 const styleLoginModal = ref({
     display: 'none',
@@ -35,6 +32,55 @@ const closeSignupBtn = () => {
     styleSignupModal.value.display = 'none';
 }
 
+const signupUser = () => {
+    if (!signupId.value.trim() || !signupPw.value.trim()
+        || !signupName.value.trim() || !signupRrn.value.trim()) {
+        alert("빈칸이 없도록 입력해주세요.");
+    } else {
+        const body = {
+            userid: signupId.value,
+            userpassword: signupPw.value,
+            username: signupName.value,
+            rrn: signupRrn.value
+        };
+
+        signup(
+            body,
+            ({ data }) => {
+                console.log(data);
+            },
+            (err) => {
+                console.log(err);
+            }
+        )
+    }
+}
+
+const loginId = ref("");
+const loginPw = ref("");
+const loginUser = () => {
+    console.log(loginId.value,loginPw.value)
+    if (!loginId.value.trim() || !loginPw.value.trim()) {
+        alert("빈칸이 없도록 입력해주세요.");
+    } else {
+        const body = {
+            userid: loginId.value,
+            userpassword: loginPw.value,
+        };
+
+        login(
+            body,
+            ({ data }) => {
+                console.log(data);
+            },
+            (err) => {
+                console.log(err);
+            }
+        )
+    }
+}
+const logoutUser = () => {
+}
 </script>
 
 <template>
@@ -45,7 +91,7 @@ const closeSignupBtn = () => {
         </div>
         <div v-else>
             <span>{{ id }} 님</span>
-            <button @click="logout" id="logout" style="margin-left:5px">로그아웃</button>
+            <button @click="logoutUser" id="logout" style="margin-left:5px">로그아웃</button>
         </div>
         <div>
             <!-- 회원가입 Modal -->
@@ -53,12 +99,12 @@ const closeSignupBtn = () => {
                 <div id="modalBody" class="modalBody">
                     <span @click="closeSignupBtn" id="closeSignupBtn" class="closeBtn">&times;</span>
                     <div class="form">
-                        <form name="register-form" class="register-form">
-                            <input id="id" name="id" type="text" placeholder="아이디" /> <input id="password" name="password"
-                                type="password" placeholder="비밀번호" />
-                            <input id="name" name="name" type="text" placeholder="이름" />
-                            <input id="rrn" name="rrn" type="text" placeholder="주민번호" />
-                            <button id="signup-submit" type="button">회원 등록</button>
+                        <form name="signuper-form" class="signuper-form">
+                            <input v-model="signupId" id="id" name="id" type="text" placeholder="아이디" />
+                            <input v-model="signupPw" id="password" name="password" type="password" placeholder="비밀번호" />
+                            <input v-model="signupName" id="name" name="name" type="text" placeholder="이름" />
+                            <input v-model="signupRrn" id="rrn" name="rrn" type="text" placeholder="주민번호" />
+                            <button @click="signupUser" id="signup-submit" type="button">회원 등록</button>
                         </form>
                     </div>
                 </div>
@@ -66,14 +112,15 @@ const closeSignupBtn = () => {
         </div>
         <div>
             <!-- 로그인 Modal -->
-            <div :style="styleLoginModal" v-if="!modalOpened" id="loginModal" class="modalWrap">
+            <div :style="styleLoginModal" id="loginModal" class="modalWrap">
                 <div id="modalBody" class="modalBody">
                     <span @click="closeLoginBtn" id="closeLoginBtn" class="closeBtn">&times;</span>
                     <div class="form">
                         <form name="login-form" class="login-form">
-                            <input id="id-login" name="id" type="text" placeholder="아이디" /> <input id="password-login"
+                            <input v-model="loginId" id="id-login" name="id" type="text" placeholder="아이디" />
+                            <input v-model="loginPw" id="password-login"
                                 name="password" type="password" placeholder="비밀번호" />
-                            <button id="login-btn" type="button">로그인</button>
+                            <button @click="loginUser" id="login-btn" type="button">로그인</button>
                         </form>
                     </div>
                 </div>

@@ -1,19 +1,17 @@
-import { localAxios } from "@/utils/http-commons";
+import { localAxios } from "@/utils/http-commons.js";
 
 const local = localAxios;
 
-function login(param, success, fail) {
-    local
-        .post(`/user/login`, { params: param })
-        .then(success)
-        .catch(fail);
+function signup(body, success, fail) {
+  local.post(`/member/signup`, body).then(success).catch(fail);
 }
 
-function logout(articleno, success, fail) {
-    local
-        .get(`/user/logout`)
-        .then(success)
-        .catch(fail);
+function login(body, success, fail) {
+  local.post(`/member/login`, body).then(success).catch(fail);
 }
 
-export {login, logout}
+function logout(success, fail) {
+  local.get(`/member/logout`).then(success).catch(fail);
+}
+
+export { signup, login, logout };
