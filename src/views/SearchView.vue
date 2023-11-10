@@ -1,12 +1,22 @@
-<script setup></script>
+<script setup>
+import { ref, onMounted } from 'vue';
+import fetchsido from '@/api/sidoGun.js'
+// const sido = ref("");
+const sidos = ref([])
+
+onMounted( async() => {
+  sidos.value = await fetchsido();
+})
+
+</script>
 
 <template>
   <div class="container">
-    <h2>관광지 탐색</h2>
     <div class="AreaSelect">
       <div class="Select">
         <select id="sido">
           <option value="">시도선택</option>
+          <option v-for="sido in sidos" :key="sido.code" :value="sido.code">{{ sido.name }}</option>
         </select>
       </div>
       <div class="Select">
