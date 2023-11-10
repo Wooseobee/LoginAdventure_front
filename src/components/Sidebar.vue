@@ -18,9 +18,9 @@ import SearchBoxView from "../views/SearchBoxView.vue";
 						<LoginView/>
 					</div>
 				</div>
+				<SearchBoxView/>
 			</div>
 		</div>
-		<SearchBoxView/>
 		<div class="Info">
 			<nav>
 				<button id="searchPlaceBtn">관광지 탐색</button>
