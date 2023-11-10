@@ -1,20 +1,26 @@
-<script setup></script>
+<script setup>
+  import { ref, onMounted } from 'vue';
+  import { planList } from '@/api/plan';
+
+  const plans = ref([
+    { title: 'plan1', userid: 'jongwoo', content: 'test1' },
+    { title: 'plan2', userid: 'jongwoo', content: 'test2' },
+    { title: 'plan3', userid: 'jongwoo', content: 'test3' },
+  ]);
+</script>
 
 <template>
   <div>
-    my plan
-
-    <h2>나의 여행계획 목록</h2>
     <ul class="planList">
-      <li class="planLi" id="${contentid}">
+      <li v-for="plan in plans" :key="plan.contentid" class="planLi" id="${contentid}">
         <div class="planTitle">
           <span class="dummyIcon">📌</span>
 
-          <span>title</span>
+          <span>{{ plan.title }}</span>
         </div>
         <div>
-          <span class="planTerm">userid</span>
-          <p class="planText">content</p>
+          <span class="planTerm">{{ plan.userid }}</span>
+          <p class="planText">{{ plan.content }}</p>
         </div>
       </li>
     </ul>

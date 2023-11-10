@@ -1,7 +1,7 @@
 <script setup>
   import SearchView from '@/views/SearchView.vue';
   import MyPlanListView from './MyPlanListView.vue';
-  import fetchSido, { fetchGugun } from '@/assets/js/ajax/fetchSidoOrGun.js';
+  // import fetchSido, { fetchGugun } from '@/assets/js/ajax/fetchSidoOrGun.js';
   import { ref } from 'vue';
 
   const isSearch = ref(true);
