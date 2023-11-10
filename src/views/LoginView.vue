@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from 'vue';
-import { setCookie, getCookie, deleteCookie } from "@/assets/js/util/cookie.js"
+import { ref, inject } from 'vue';
+import { setCookie, deleteCookie } from "@/assets/js/util/cookie.js"
 import { signup, login, logout } from "@/api/user.js"
-const id = ref(getCookie("id"));
+const id = inject("id");
+
 const signupId = ref("");
 const signupPw = ref("");
 const signupName = ref("");
@@ -59,7 +60,6 @@ const signupUser = () => {
 const loginId = ref("");
 const loginPw = ref("");
 const loginUser = () => {
-    console.log(loginId.value,loginPw.value)
     if (!loginId.value.trim() || !loginPw.value.trim()) {
         alert("빈칸이 없도록 입력해주세요.");
     } else {
@@ -73,6 +73,7 @@ const loginUser = () => {
             ({ data }) => {
                 console.log(data);
                 setCookie('id', body.userid);
+                id.value = body.userid;
                 closeLoginBtn();
             },
             (err) => {
@@ -82,6 +83,20 @@ const loginUser = () => {
     }
 }
 const logoutUser = () => {
+    if (!id) {
+        alert("로그인부터 해주세요.");
+    } else {
+        logout(
+            ({data}) => {
+                console.log(data);
+                id.value = "";
+                deleteCookie("id");
+            },
+            (err) => {
+                console.log(err);
+            }
+        )
+    }
 }
 </script>
 
@@ -120,8 +135,8 @@ const logoutUser = () => {
                     <div class="form">
                         <form name="login-form" class="login-form">
                             <input v-model="loginId" id="id-login" name="id" type="text" placeholder="아이디" />
-                            <input v-model="loginPw" id="password-login"
-                                name="password" type="password" placeholder="비밀번호" />
+                            <input v-model="loginPw" id="password-login" name="password" type="password"
+                                placeholder="비밀번호" />
                             <button @click="loginUser" id="login-btn" type="button">로그인</button>
                         </form>
                     </div>
