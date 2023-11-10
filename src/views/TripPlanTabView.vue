@@ -31,6 +31,12 @@
       <button @click="myPlanClick" :class="{ navSelected: !isSearch }">나의 여행계획</button>
     </nav>
     <div id="asideMain" class="InfoView"></div>
+    <div v-if="isSearch">
+      <SearchView />
+    </div>
+    <div v-else>
+      <MyPlanListView />
+    </div>
     <button id="registPlanBtn" class="addPlanBtnContainer">
       <svg
         class="addPlanBtn"
@@ -44,12 +50,6 @@
         />
       </svg>
     </button>
-    <div v-if="isSearch">
-      <SearchView />
-    </div>
-    <div v-else>
-      <MyPlanListView />
-    </div>
   </div>
 </template>
 
