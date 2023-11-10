@@ -270,7 +270,7 @@ function fetchInit(){
   // let searchUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
   // let searchUrl = `https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=${serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
 
-  let queryString = `serviceKey=${serviceKey}&numOfRows=200&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
+  let queryString = `serviceKey=jKuaP%2FnFxe7%2ByvRe8h%2B7LHRX%2FG9hz15s5jvlF1AvlEgtj42HGR%2FJIs9ERPZGrU3TAykKDiagiJkXCi09eg%2BT7A%3D%3D&numOfRows=200&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
   let service =   `areaBasedList1`;
   let searchUrl = baseUrl + service + "?" + queryString;
   fetch(searchUrl)
