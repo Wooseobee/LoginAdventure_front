@@ -1,13 +1,12 @@
 <script setup>
-import Sidebar from '@/components/common/Sidebar.vue'
-import kakaoMap from "@/components/kakaoMap.vue";
+  import Sidebar from '@/components/common/Sidebar.vue';
+  import kakaoMap from '@/components/kakaoMap.vue';
+  import KMap from '@/components/KMap.vue';
 </script>
 
 <template>
-    <Sidebar></Sidebar>
-    <kakaoMap :latitude="37.5013" :longitude="127.0397" />
+  <Sidebar></Sidebar>
+  <KMap />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
