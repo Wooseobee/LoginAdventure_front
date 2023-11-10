@@ -1,7 +1,8 @@
 import {getCookie,deleteCookie} from "./util/cookie.js"
 function renderUser(){
 	const id = getCookie("id");
-    if(!id){
+  if (!id) {
+      
        document.getElementById("user").innerHTML=`
          <button type="button" id="signup">회원가입</button>
          <button type="button" id="login">로그인</button>

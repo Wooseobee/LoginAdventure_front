@@ -1,5 +1,7 @@
 <script setup>
-import '@/assets/js/nav.js'
+// import '@/assets/js/header.js'
+import SearchView from "../../views/SearchView.vue";
+import LoginView from "../../views/LoginView.vue";
 </script>
 
 <template>
@@ -12,6 +14,7 @@ import '@/assets/js/nav.js'
 					</div>
 					<div id="user">
 						<!--로그인 여부-->
+						<LoginView/>
 					</div>
 				</div>
 				<div id="search" class="Search">
@@ -41,6 +44,7 @@ import '@/assets/js/nav.js'
 					<path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
 				</svg>
 			</button>
+			<SearchView/>
 			<footer class="Footer">
 				<span>공지사항</span>
 			</footer>
@@ -52,20 +56,6 @@ import '@/assets/js/nav.js'
 			<div id="map" style="width: 100%; height: 100%">
 			</div>
 		</main>
-
-		<!-- 로그인 Modal -->
-		<div id="loginModal" class="modalWrap">
-			<div id="modalBody" class="modalBody">
-				<span id="closeLoginBtn" class="closeBtn">&times;</span>
-				<div class="form">
-					<form name="login-form" class="login-form">
-						<input id="id-login" name="id" type="text" placeholder="아이디" /> <input id="password-login"
-							name="password" type="password" placeholder="비밀번호" />
-						<button id="login-btn" type="button">로그인</button>
-					</form>
-				</div>
-			</div>
-		</div>
 
 		<!-- 여행계획 등록 Modal -->
 		<div id="planRegistModal" class="modalWrap">
