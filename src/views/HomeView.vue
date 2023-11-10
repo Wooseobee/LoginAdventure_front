@@ -1,5 +1,5 @@
 <script setup>
-  import Sidebar from '@/components/common/Sidebar.vue';
+  import Sidebar from '@/components/Sidebar.vue';
   import KMap from '@/components/KMap.vue';
 </script>
 
