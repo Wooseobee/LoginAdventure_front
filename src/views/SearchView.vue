@@ -1,10 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import fetchsido from '@/api/sidoGun.js'
+import fetchsido, { fetchGugun } from '@/api/sidoGun.js'
 // const sido = ref("");
-const sidos = ref([])
+const sidos = ref([]);
+const guguns = ref([]);
 
-onMounted( async() => {
+onMounted(async () => {
   sidos.value = await fetchsido();
 })
 
@@ -63,9 +64,9 @@ onMounted( async() => {
 </template>
 
 <style scoped>
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 </style>
