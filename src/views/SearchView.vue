@@ -1,13 +1,19 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import fetchsido, { fetchGugun } from '@/api/sidoGun.js'
-// const sido = ref("");
+
 const sidos = ref([]);
 const guguns = ref([]);
+const selectedSido = ref("");
 
 onMounted(async () => {
   sidos.value = await fetchsido();
 })
+
+async function selectSido() {
+    guguns.value = await fetchGugun(selectedSido.value);
+    console.log("hello")
+}
 
 </script>
 
@@ -15,14 +21,15 @@ onMounted(async () => {
   <div class="container">
     <div class="AreaSelect">
       <div class="Select">
-        <select id="sido">
+        <select v-model="selectedSido" @change="selectSido" id="sido">
           <option value="">시도선택</option>
           <option v-for="sido in sidos" :key="sido.code" :value="sido.code">{{ sido.name }}</option>
         </select>
       </div>
       <div class="Select">
         <select id="gugun">
-          <option value="">구군선택</option>
+            <option value="">구군선택</option>
+          <option v-for="gugun in guguns" :key="gugun.code" :value="gugun.code">{{ gugun.name }}</option>
         </select>
       </div>
     </div>

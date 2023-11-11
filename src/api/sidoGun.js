@@ -13,9 +13,9 @@ export default async function fetchSido() {
   });
 }
 
-export default async function fetchGugun(areaCode) {
-    url = url + "&areaCode=" + areaCode;
-    return local.get(url).then(({ data }) => {
+export async function fetchGugun(areaCode) {
+    const requestUrl = url + "&areaCode=" + areaCode;
+    return local.get(requestUrl).then(({ data }) => {
         return data.response.body.items.item;
     })
 }

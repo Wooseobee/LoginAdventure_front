@@ -218,7 +218,7 @@
       // 마커에 표시할 인포윈도우를 생성합니다
       var content = `
     <div class="wrap">
-      <div class="info">  
+      <div class="info">
         <div class="title">
             ${positions[i].title}
           </div>
@@ -238,7 +238,7 @@
       }</div>
             </div>
         </div>
-      </div>   
+      </div>
     </div>
     `;
 
