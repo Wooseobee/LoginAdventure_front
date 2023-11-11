@@ -1,8 +1,11 @@
-<script setup></script>
+<script setup>
+
+
+</script>
 
 <template>
   <!-- 여행계획 등록 Modal -->
-  <div id="planRegistModal" class="modalWrap">
+  <div style="display: block" id="planRegistModal" class="modalWrap">
     <div id="modalBody" class="modalBody">
       <span id="closePlanRegistBtn" class="closeBtn">&times;</span>
       <div class="form">
