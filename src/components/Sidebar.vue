@@ -1,8 +1,9 @@
 <script setup>
-  // import '@/assets/js/header.js'
-  import LoginView from '@/views/LoginView.vue';
-  import SearchBoxView from '@/views/SearchBoxView.vue';
-  import TripPlanTabView from '@/views/TripPlanTabView.vue';
+// import '@/assets/js/header.js'
+import LoginView from "@/views/LoginView.vue";
+import SearchBoxView from "@/views/SearchBoxView.vue";
+import TripPlanTabView from "@/views/TripPlanTabView.vue";
+import PlanRegistView from "@/views/PlanRegistView.vue";
 </script>
 
 <template>
@@ -18,6 +19,7 @@
             <LoginView />
           </div>
         </div>
+        <PlanRegistView />
         <SearchBoxView />
       </div>
     </div>
@@ -33,13 +35,6 @@
       <div id="map" style="width: 100%; height: 100%"></div>
     </main>
 
-    <!-- 여행계획 view Modal -->
-    <div id="planViewModal" class="modalWrap">
-      <div id="modalBody" class="modalBody">
-        <span id="closePlanViewModalBtn" class="closeBtn">&times;</span>
-        <div class="planViewBody"></div>
-      </div>
-    </div>
   </div>
 </template>
 
