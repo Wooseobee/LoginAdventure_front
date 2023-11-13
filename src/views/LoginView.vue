@@ -2,7 +2,9 @@
 import { ref, inject } from 'vue';
 import { setCookie, deleteCookie } from '@/assets/js/util/cookie.js';
 import { signup, login, logout } from '@/api/user.js';
-const id = inject('id');
+import { useMemberStore } from '@/stores/member'
+
+const userStore = useMemberStore();
 
 const signupId = ref('');
 const signupPw = ref('');
@@ -49,16 +51,8 @@ const signupUser = () => {
             rrn: signupRrn.value,
         };
 
-        signup(
-            body,
-            ({ data }) => {
-                console.log(data);
-                closeSignupBtn();
-            },
-            (err) => {
-                console.log(err);
-            }
-        );
+        userStore.signupMember(body);
+        closeSignupBtn();
     }
 };
 
@@ -73,46 +67,27 @@ const loginUser = () => {
             userpassword: loginPw.value,
         };
 
-        login(
-            body,
-            ({ data }) => {
-                console.log(data);
-                setCookie('id', body.userid);
-                id.value = body.userid;
-                closeLoginBtn();
-            },
-            (err) => {
-                console.log(err);
-            }
-        );
+        userStore.loginMember(body);
+        closeLoginBtn();
     }
 };
 const logoutUser = () => {
-    if (!id) {
+    if (!userStore.id) {
         alert('로그인부터 해주세요.');
     } else {
-        logout(
-            ({ data }) => {
-                console.log(data);
-                id.value = '';
-                deleteCookie('id');
-            },
-            (err) => {
-                console.log(err);
-            }
-        );
+        userStore.logoutMember();
     }
 };
 </script>
 
 <template>
     <div>
-        <div v-if="!id">
+        <div v-if="!userStore.id">
             <button @click="signupModal" type="button" id="signup">회원가입</button>
             <button @click="loginModal" type="button" id="login">로그인</button>
         </div>
         <div v-else>
-            <span>{{ id }} 님</span>
+            <span>{{ userStore.id }} 님</span>
             <button @click="logoutUser" id="logout" style="margin-left: 5px">로그아웃</button>
         </div>
         <div>

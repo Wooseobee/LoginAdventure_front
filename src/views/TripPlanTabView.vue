@@ -3,26 +3,25 @@ import SearchView from "@/views/SearchView.vue";
 import MyPlanListView from "./MyPlanListView.vue";
 import TheTodoView from "./TheTodoView.vue";
 // import fetchSido, { fetchGugun } from '@/assets/js/ajax/fetchSidoOrGun.js';
-import { ref, inject } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useMemberStore } from "@/stores/member"
 
-const id = inject("id");
-const isSearch = ref(true);
-const isPlan = ref(false);
-const isTodo = ref(false);
+const userStore = useMemberStore();
+
 function searchPlaceClick() {
-  if (isSearch.value) return;
-  isSearch.value = true;
-  isPlan.value = false;
-  isTodo.value = false;
+  if (userStore.isSearch) return;
+  userStore.isSearch = true;
+  userStore.isPlan = false;
+  userStore.isTodo = false;
   // fetchSido('sido', '*00000000');
 }
 
 function myPlanClick() {
-  if (isPlan.value) return;
-  isSearch.value = false;
-  isPlan.value = true;
-  isTodo.value = false;
+  if (userStore.isPlan) return;
+  userStore.isSearch = false;
+  userStore.isPlan = true;
+  userStore.isTodo = false;
   // let body = { sign: "planList" };
   // body = JSON.stringify(body);
   // console.log(body);
@@ -34,25 +33,25 @@ function myPlanClick() {
 const router = useRouter();
 
 function todoClick() {
-  if (isTodo.value) return;
-  isSearch.value = false;
-  isPlan.value = false;
-  isTodo.value = true;
+  if (userStore.isTodo) return;
+  userStore.isSearch = false;
+  userStore.isPlan = false;
+  userStore.isTodo = true;
   router.push({ name: 'todos' });
 }
 </script>
 
 <template>
   <div>
-    <div v-if="id">
+    <div v-if="userStore.id">
     <nav>
-      <button @click="searchPlaceClick" :class="{ navSelected: isSearch }">
+      <button @click="searchPlaceClick" :class="{ navSelected: userStore.isSearch }">
         관광지 탐색
       </button>
-        <button @click="myPlanClick" :class="{ navSelected: isPlan }">
+        <button @click="myPlanClick" :class="{ navSelected: userStore.isPlan }">
           나의 여행계획
         </button>
-        <button @click="todoClick" :class="{ navSelected: isTodo }">
+        <button @click="todoClick" :class="{ navSelected: userStore.isTodo }">
           오늘의 할일
         </button>
       </nav>
@@ -65,13 +64,13 @@ function todoClick() {
       </button>
       </nav>
     </div>
-    <div v-if="isSearch">
+    <div v-if="userStore.isSearch">
       <SearchView />
     </div>
-    <div v-if="isPlan">
+    <div v-if="userStore.isPlan">
       <MyPlanListView />
     </div>
-    <div v-if="isTodo">
+    <div v-if="userStore.isTodo">
       <TheTodoView/>
     </div>
   </div>
