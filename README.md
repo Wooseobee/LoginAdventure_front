@@ -20,7 +20,7 @@
 
 ### 로그인 모달
 
-![regist](public/readmeImg/loginModal.png)
+![login](public/readmeImg/loginModal.png)
 
 ### 메인 화면 로그인 상태
 
@@ -43,7 +43,7 @@
 
 ### Component 구조
 
-<img width="761" alt="스크린샷 2023-11-12 오후 2 40 20" src="https://github.com/Wooseobee/Algorithm/assets/87111673/3ea2df2d-fde3-4737-81a1-9dfc875a80ac">
+![component](public/readmeImg/componentStructure.png)
 
 ### 1. Vue Compoenent로 변경
 
