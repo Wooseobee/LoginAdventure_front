@@ -77,4 +77,8 @@ function todoClick() {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+button {
+  font-size: small;
+}
+</style>
