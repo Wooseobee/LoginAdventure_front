@@ -29,6 +29,9 @@
   // 지역, 유형, 검색어 얻기.
   // 위 데이터를 가지고 공공데이터에 요청.
   // 받은 데이터를 이용하여 화면 구성.
+  document.getElementById('searchBtn').addEventListener('click', () => {
+    fetchPlace();
+  });
   document.getElementById('sido').addEventListener('change', () => {
     fetchPlace();
   });
@@ -49,7 +52,7 @@
     };
   });
   let positions; // marker 배열.
-  function fetchPlaceByContentTypeId() {
+function fetchPlaceByContentTypeId() {
     if (filters.length == 0) {
       if (!document.getElementById('sido').value) {
         fetchInit();
@@ -127,13 +130,13 @@
       map.setLevel(11);
     }
     //let contentTypeId = document.getElementById("search-content-id").value;
-    let keyword = '';
+    let keyword = document.getElementById('keyword').value;
     if (areaCode && parseInt(areaCode)) queryString += `&areaCode=${areaCode}`;
     //if (parseInt(contentTypeId)) queryString += `&contentTypeId=${contentTypeId}`;
-    // if (!keyword) {
+// if (!keyword) {
     //   alert("검색어 입력 필수!!!");
     //   return;
-    // } else searchUrl += `&keyword=${keyword}`;
+    // } else searchUrl += `&keyword=${keyword}`; 
     if (sigunguCode) {
       queryString += `&sigunguCode=${sigunguCode}`;
     }

@@ -4,9 +4,9 @@
 
 <template>
     <div id="search" class="Search">
-        <form action="" class="KeywordSearch">
-            <input class="searchInput" type="search" placeholder="검색어를 입력하세요.">
-            <button class="fa-search">
+        <form v-on:submit.prevent="" action="" class="KeywordSearch">
+            <input class="searchInput" type="search" placeholder="검색어를 입력하세요." id="keyword">
+            <button class="fa-search" id="searchBtn">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" stroke="#19CE60" viewBox="0 0 512 512">
                     <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                     <path
