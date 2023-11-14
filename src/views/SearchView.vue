@@ -22,7 +22,7 @@ async function selectSido() {
     <div class="AreaSelect">
       <div class="Select">
         <select v-model="selectedSido" @change="selectSido" id="sido">
-          <option value="">시도선택</option>
+          <option value="" disabled>시도선택</option>
           <option v-for="sido in sidos" :key="sido.code" :value="sido.code">{{ sido.name }}</option>
         </select>
       </div>
