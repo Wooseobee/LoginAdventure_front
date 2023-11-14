@@ -1,6 +1,8 @@
 <script setup>
 import {ref, inject} from 'vue';
-const id = inject('id');
+import { useMemberStore } from '@/stores/member'
+
+const userStore = useMemberStore();
 
 const titleStyle = ref({
     color: '#258fff',
@@ -23,7 +25,7 @@ const hidePlanModal = () => {
 
 <template>
   <!-- plan regist -->
-  <div v-if="id">
+  <div v-if="userStore.id">
     <button
       @click="showPlanModal"
       id="registPlanBtn"

@@ -29,12 +29,12 @@
   // 지역, 유형, 검색어 얻기.
   // 위 데이터를 가지고 공공데이터에 요청.
   // 받은 데이터를 이용하여 화면 구성.
-  // document.getElementById('sido').addEventListener('change', () => {
-  //   fetchPlace();
-  // });
-  // document.getElementById('gugun').addEventListener('change', () => {
-  //   fetchPlace();
-  // });
+  document.getElementById('sido').addEventListener('change', () => {
+    fetchPlace();
+  });
+  document.getElementById('gugun').addEventListener('change', () => {
+    fetchPlace();
+  });
   let filters = [];
   document.querySelectorAll('.filterIcon').forEach(($btn) => {
     $btn.onclick = () => {

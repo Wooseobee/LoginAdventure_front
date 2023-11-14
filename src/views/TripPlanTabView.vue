@@ -59,7 +59,7 @@ function todoClick() {
     </div>
     <div v-else>
       <nav>
-        <button @click="searchPlaceClick" :class="{ navSelected: isSearch }">
+        <button @click="searchPlaceClick" :class="{ navSelected: userStore.isSearch }">
         관광지 탐색
       </button>
       </nav>
