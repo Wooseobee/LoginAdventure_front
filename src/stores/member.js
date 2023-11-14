@@ -1,11 +1,11 @@
-import { ref } from "vue";
-import { defineStore } from "pinia";
-import { getCookie, setCookie, deleteCookie } from "@/assets/js/util/cookie.js";
-import { signup, login, logout } from "@/api/user.js";
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
+import { getCookie, setCookie, deleteCookie } from '@/assets/js/util/cookie.js';
+import { signup, login, logout } from '@/api/user.js';
 
-export const useMemberStore = defineStore("member", () => {
-  const id = ref("");
-  const cookieId = getCookie("id");
+export const useMemberStore = defineStore('member', () => {
+  const id = ref('');
+  const cookieId = getCookie('id');
   const isSearch = ref(true);
   const isPlan = ref(false);
   const isTodo = ref(false);
@@ -25,26 +25,12 @@ export const useMemberStore = defineStore("member", () => {
     );
   };
 
-  const loginMember = function (body) {
-    login(
-      body,
-      ({ data }) => {
-        console.log(data);
-        setCookie("id", body.userid);
-        id.value = body.userid;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  };
-
   const logoutMember = function () {
     logout(
       ({ data }) => {
         console.log(data);
-        id.value = "";
-        deleteCookie("id");
+        id.value = '';
+        deleteCookie('id');
         isSearch.value = true;
         isPlan.value = false;
         isTodo.value = false;
@@ -54,5 +40,5 @@ export const useMemberStore = defineStore("member", () => {
       }
     );
   };
-  return { id, cookieId, isSearch, isPlan, isTodo, signupMember, loginMember, logoutMember };
+  return { id, cookieId, isSearch, isPlan, isTodo, signupMember, logoutMember };
 });
