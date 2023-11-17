@@ -5,8 +5,8 @@ import KMap from '@/components/KMap.vue';
 
 <template>
   <Sidebar></Sidebar>
-  <!-- <KMap /> -->
-  <router-view></router-view>
+  <KMap />
+  <!-- <router-view></router-view> -->
 </template>
 
 <style scoped></style>

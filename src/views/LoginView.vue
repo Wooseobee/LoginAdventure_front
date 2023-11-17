@@ -141,6 +141,10 @@
                 placeholder="비밀번호"
               />
               <button @click="loginUser" id="login-btn" type="button">로그인</button>
+          <!-- <router-link :to="{name : 'jwtlogin'}">JWT로그인</router-link> -->
+          <a href="https://kauth.kakao.com/oauth/authorize?client_id=0fcbc84f0fab706f3524ed52931c49d4&redirect_uri=http://localhost:8080/user/kakaologin&response_type=code">
+            <img src="@/assets/kakao_login_small.png">
+          </a>
             </form>
           </div>
         </div>

@@ -12,12 +12,8 @@ import PlanRegistView from "@/views/PlanRegistView.vue";
       <div id="header" class="Header" role="banner">
         <div>
           <div class="Title">
-            <a href="">EnjoyTrip</a>
+            <a href="">LoginAdventure</a>
           </div>
-          <router-link :to="{name : 'jwtlogin'}">JWT로그인</router-link>
-          <a href="https://kauth.kakao.com/oauth/authorize?client_id=0fcbc84f0fab706f3524ed52931c49d4&redirect_uri=http://localhost:8080/user/kakaologin&response_type=code">
-            <img src="@/assets/kakao_login_small.png">
-          </a>
           <div id="user">
             <!--로그인 여부-->
             <LoginView />
