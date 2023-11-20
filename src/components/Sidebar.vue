@@ -31,9 +31,9 @@ import PlanRegistView from "@/views/PlanRegistView.vue";
     </div>
     <div class="bar"></div>
 
-    <!-- <main class="View">
+    <main class="View">
       <div id="map" style="width: 100%; height: 100%"></div>
-    </main> -->
+    </main>
 
   </div>
 </template>

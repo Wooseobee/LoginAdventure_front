@@ -14,11 +14,6 @@ const router = createRouter({
       name: "todos",
       component: () => import("@/views/TheTodoView.vue"),
     },
-    {
-      path: "/jwtlogin",
-      name: "jwtlogin",
-      component: () => import("@/components/member/Login.vue"),
-    },
   ],
 });
 
