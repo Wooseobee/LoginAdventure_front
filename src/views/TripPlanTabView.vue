@@ -13,7 +13,7 @@ function searchPlaceClick() {
   if (userStore.isSearch) return;
   userStore.isSearch = true;
   userStore.isPlan = false;
-  userStore.isTodo = false;
+  userStore.isMyInfo = false;
   // fetchSido('sido', '*00000000');
 }
 
@@ -21,7 +21,7 @@ function myPlanClick() {
   if (userStore.isPlan) return;
   userStore.isSearch = false;
   userStore.isPlan = true;
-  userStore.isTodo = false;
+  userStore.isMyInfo = false;
   // let body = { sign: "planList" };
   // body = JSON.stringify(body);
   // console.log(body);
@@ -32,11 +32,11 @@ function myPlanClick() {
 }
 const router = useRouter();
 
-function todoClick() {
-  if (userStore.isTodo) return;
+function myInfoClick() {
+  if (userStore.isMyInfo) return;
   userStore.isSearch = false;
   userStore.isPlan = false;
-  userStore.isTodo = true;
+  userStore.isMyInfo = true;
   router.push({ name: 'todos' });
 }
 </script>
@@ -51,8 +51,8 @@ function todoClick() {
         <button @click="myPlanClick" :class="{ navSelected: userStore.isPlan }">
           나의 여행계획
         </button>
-        <button @click="todoClick" :class="{ navSelected: userStore.isTodo }">
-          오늘의 할일
+        <button @click="myInfoClick" :class="{ navSelected: userStore.isMyInfo }">
+          내 정보 조회
         </button>
       </nav>
       <div id="asideMain" class="InfoView"></div>
@@ -70,7 +70,7 @@ function todoClick() {
     <div v-if="userStore.isPlan">
       <MyPlanListView />
     </div>
-    <div v-if="userStore.isTodo">
+    <div v-if="userStore.isMyInfo">
       <TheTodoView/>
     </div>
   </div>

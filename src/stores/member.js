@@ -9,7 +9,7 @@ export const useMemberStore = defineStore("member", () => {
   const sessionId = sessionStorage.getItem("id");
   const isSearch = ref(true);
   const isPlan = ref(false);
-  const isTodo = ref(false);
+  const isMyInfo = ref(false);
   const rememberMe = ref(false);
   const uuid = ref("");
   const modulus = ref("");
@@ -64,7 +64,7 @@ export const useMemberStore = defineStore("member", () => {
         id.value = "";
         isSearch.value = true;
         isPlan.value = false;
-        isTodo.value = false;
+        isMyInfo.value = false;
       },
       (err) => {
         console.log("err났슈");
@@ -76,7 +76,7 @@ export const useMemberStore = defineStore("member", () => {
     cookieId,
     isSearch,
     isPlan,
-    isTodo,
+    isMyInfo,
     rememberMe,
     heightUser,
     signupUser,
