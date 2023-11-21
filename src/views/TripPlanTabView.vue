@@ -2,12 +2,17 @@
 import SearchView from "@/views/SearchView.vue";
 import MyPlanListView from "./MyPlanListView.vue";
 import TheTodoView from "./TheTodoView.vue";
-// import fetchSido, { fetchGugun } from '@/assets/js/ajax/fetchSidoOrGun.js';
-import { ref } from "vue";
-import { useRouter } from "vue-router";
 import { useMemberStore } from "@/stores/member"
+import {getCookie} from "@/assets/js/util/cookie";
+import {userinfo} from "@/api/user";
+import {provide, ref} from "vue";
 
 const userStore = useMemberStore();
+const username = ref('');
+const email = ref('');
+
+provide('username', username);
+provide('email', email);
 
 function searchPlaceClick() {
   if (userStore.isSearch) return;
@@ -30,14 +35,38 @@ function myPlanClick() {
 
   // renderMyPlan(json.planList);
 }
-const router = useRouter();
+
+const getUserinfo = () => {
+    let userid, atk;
+    if(!userStore.rememberMe) {
+        userid = sessionStorage.getItem("id");
+        atk = sessionStorage.getItem("atk");
+    } else {
+        userid = getCookie("id");
+        atk = getCookie("atk");
+    }
+    const body = {
+        userid: userid,
+        atk: atk
+    }
+    userinfo(
+        body,
+        ({data}) => {
+            username.value = data.data.username;
+            email.value = data.data.email;
+        },
+        (err) => {
+            console.log(err);
+        }
+    )
+}
 
 function myInfoClick() {
   if (userStore.isMyInfo) return;
   userStore.isSearch = false;
   userStore.isPlan = false;
   userStore.isMyInfo = true;
-  router.push({ name: 'todos' });
+  getUserinfo();
 }
 </script>
 
