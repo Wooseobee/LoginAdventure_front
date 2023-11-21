@@ -14,8 +14,8 @@ function login(body, success, fail) {
   local.post(`/user/login`, body).then(success).catch(fail);
 }
 
-function logout(success, fail) {
-  local.get(`/user/logout`).then(success).catch(fail);
+function logout(body, success, fail) {
+  local.post(`/user/logout`, body).then(success).catch(fail);
 }
 
 export { height, signup, login, logout };

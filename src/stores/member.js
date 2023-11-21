@@ -1,19 +1,25 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { getCookie, setCookie, deleteCookie } from "@/assets/js/util/cookie.js";
-import { height, signup, login, logout } from "@/api/user.js";
+import { getCookie, deleteCookie } from "@/assets/js/util/cookie.js";
+import { height, signup, logout } from "@/api/user.js";
 
 export const useMemberStore = defineStore("member", () => {
   const id = ref("");
   const cookieId = getCookie("id");
+  const sessionId = sessionStorage.getItem("id");
   const isSearch = ref(true);
   const isPlan = ref(false);
   const isTodo = ref(false);
+  const rememberMe = ref(false);
   const uuid = ref("");
   const modulus = ref("");
   const exponent = ref("");
   if (cookieId) {
     id.value = cookieId;
+  }
+
+  if (sessionId) {
+    id.value = sessionId;
   }
 
   const heightUser = async function () {
@@ -29,7 +35,7 @@ export const useMemberStore = defineStore("member", () => {
     );
   };
 
-  const signupMember = function (body) {
+  const signupUser = function (body) {
     signup(
       body,
       ({ data }) => {
@@ -41,18 +47,27 @@ export const useMemberStore = defineStore("member", () => {
     );
   };
 
-  const logoutMember = function () {
+  const logoutUser = function (body) {
+    console.log(body);
     logout(
+      body,
       ({ data }) => {
-        console.log(data);
+        if (!rememberMe.value) {
+          sessionStorage.removeItem("id");
+          sessionStorage.removeItem("atk");
+          sessionStorage.removeItem("rtk");
+        } else {
+          deleteCookie("id");
+          deleteCookie("atk");
+          deleteCookie("rtk");
+        }
         id.value = "";
-        deleteCookie("id");
         isSearch.value = true;
         isPlan.value = false;
         isTodo.value = false;
       },
       (err) => {
-        console.log(err);
+        console.log("err났슈");
       }
     );
   };
@@ -62,9 +77,10 @@ export const useMemberStore = defineStore("member", () => {
     isSearch,
     isPlan,
     isTodo,
+    rememberMe,
     heightUser,
-    signupMember,
-    logoutMember,
+    signupUser,
+    logoutUser,
     uuid,
     modulus,
     exponent,
