@@ -20,11 +20,8 @@ export const useMemberStore = defineStore("member", () => {
     await height(
       ({ data }) => {
         uuid.value = data.data.uuid;
-        modulus.value = data.modulus;
-        exponent.value = data.exponent;
-        console.log("됐어");
-        console.log(data);
-        console.log(uuid.value);
+        modulus.value = data.data.modulus;
+        exponent.value = data.data.exponent;
       },
       (err) => {
         console.log(err);
