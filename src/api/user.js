@@ -26,6 +26,10 @@ function uniqueCheck(body, success, fail) {
   local.post(`/user/checkId`, body).then(success).catch(fail);
 }
 
+function uniqueCheckEmail(body, success, fail) {
+  local.post(`/user/checkEmail`, body).then(success).catch(fail);
+}
+
 function modify(body, success, fail) {
   local.post(`/user/modify`, body).then(success).catch(fail);
 }
@@ -34,4 +38,4 @@ async function reissue(body, success, fail) {
   local.post(`/user/reissue`, body).then(success).catch(fail);
 }
 
-export { height, signup, login, logout, userinfo, uniqueCheck, modify, reissue };
+export { height, signup, login, logout, userinfo, uniqueCheck, modify, reissue, uniqueCheckEmail };

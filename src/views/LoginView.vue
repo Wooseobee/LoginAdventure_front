@@ -1,7 +1,7 @@
 <script setup>
   import { ref, watch } from 'vue';
   import { setCookie } from '@/assets/js/util/cookie.js';
-  import { login, uniqueCheck } from '@/api/user.js';
+  import { login, uniqueCheck, uniqueCheckEmail } from '@/api/user.js';
   import { useMemberStore } from '@/stores/member';
   import * as RSA from '@/assets/js/encrypt/rsa.js';
 
@@ -25,8 +25,9 @@
   const pwMsg = ref('');
   const emailMsg = ref('');
 
-  // 아이디 중복확인값
+  // 아이디 이메일 중복확인값
   const checkedId = ref('');
+  const checkedEmail = ref('');
 
   const idCheck = () => {
     const id = signupId.value;
@@ -34,12 +35,10 @@
       if (String(id).match(/^[a-z0-9_-_-]{5,20}$/)) {
         idIsValid.value = true;
         // 아이디 중복체크 -> 아직 확인되지 않았으면
-        console.log();
         const body = { userid: id };
         uniqueCheck(
           body,
           ({ data }) => {
-            console.log('id check ok');
             if (!data.data.available) {
               idIsValid.value = false;
               idMsg.value = '사용할 수 없는 아이디입니다. 다른 아이디를 입력해 주세요.';
@@ -94,18 +93,37 @@
 
   const emailCheck = () => {
     const email = signupEmail.value;
-    if (
-      String(email).match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-    ) {
-      emailIsValid.value = true;
-    } else {
-      emailIsValid.value = false;
-      if (email) {
-        emailMsg.value = '주소가 정확한지 확인해 주세요.';
+    if (checkedEmail.value!== email) {
+      if (
+        String(email).match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+      ) {
+        emailIsValid.value = true;
+        // 이메일 중복체크 -> 아직 확인되지 않았으면
+        const body = { email: email };
+        uniqueCheckEmail(
+          body,
+          ({ data }) => {
+            console.log('email check ok');
+            if (!data.data.available) {
+              emailIsValid.value = false;
+              emailMsg.value = '사용할 수 없는 이메일입니다. 다른 이메일을 입력해 주세요.';
+            }
+            checkedEmail.value = email;
+          },
+          (err) => {
+            console.log('email 중복체크 실패');
+            console.log(err);
+          }
+        );
       } else {
-        emailMsg.value = '필수 정보입니다.';
+        emailIsValid.value = false;
+        if (email) {
+          emailMsg.value = '주소가 정확한지 확인해 주세요.';
+        } else {
+          emailMsg.value = '필수 정보입니다.';
+        }
       }
     }
   };
@@ -173,6 +191,7 @@
 
       userStore.signupUser(body);
       closeSignupBtn();
+      alert("회원가입 완료");
     }
   };
   const loginUser = () => {
