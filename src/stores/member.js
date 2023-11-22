@@ -1,19 +1,19 @@
-import { ref } from "vue";
-import { defineStore } from "pinia";
-import { getCookie, deleteCookie } from "@/assets/js/util/cookie.js";
-import { height, signup, logout } from "@/api/user.js";
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
+import { getCookie, deleteCookie } from '@/assets/js/util/cookie.js';
+import { height, signup, logout } from '@/api/user.js';
 
-export const useMemberStore = defineStore("member", () => {
-  const id = ref("");
-  const cookieId = getCookie("id");
-  const sessionId = sessionStorage.getItem("id");
+export const useMemberStore = defineStore('member', () => {
+  const id = ref('');
+  const cookieId = getCookie('id');
+  const sessionId = sessionStorage.getItem('id');
   const isSearch = ref(true);
   const isPlan = ref(false);
   const isMyInfo = ref(false);
   const rememberMe = ref(false);
-  const uuid = ref("");
-  const modulus = ref("");
-  const exponent = ref("");
+  const uuid = ref('');
+  const modulus = ref('');
+  const exponent = ref('');
   if (cookieId) {
     id.value = cookieId;
   }
@@ -47,27 +47,29 @@ export const useMemberStore = defineStore("member", () => {
     );
   };
 
-  const logoutUser = function (body) {
+  const logoutUser = function (body, headers) {
     console.log(body);
+    console.log(headers);
     logout(
       body,
+      headers,
       ({ data }) => {
         if (!rememberMe.value) {
-          sessionStorage.removeItem("id");
-          sessionStorage.removeItem("atk");
-          sessionStorage.removeItem("rtk");
+          sessionStorage.removeItem('id');
+          sessionStorage.removeItem('atk');
+          sessionStorage.removeItem('rtk');
         } else {
-          deleteCookie("id");
-          deleteCookie("atk");
-          deleteCookie("rtk");
+          deleteCookie('id');
+          deleteCookie('atk');
+          deleteCookie('rtk');
         }
-        id.value = "";
+        id.value = '';
         isSearch.value = true;
         isPlan.value = false;
         isMyInfo.value = false;
       },
       (err) => {
-        console.log("err났슈");
+        console.log('err났슈');
       }
     );
   };

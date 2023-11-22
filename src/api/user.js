@@ -1,4 +1,4 @@
-import { localAxios } from "@/utils/http-commons.js";
+import { localAxios } from '@/utils/http-commons.js';
 
 const local = localAxios;
 
@@ -14,11 +14,16 @@ function login(body, success, fail) {
   local.post(`/user/login`, body).then(success).catch(fail);
 }
 
-function logout(body, success, fail) {
+function logout(body, headers, success, fail) {
   local.post(`/user/logout`, body).then(success).catch(fail);
 }
 
 function userinfo(body, success, fail) {
   local.post(`/user/userinfo`, body).then(success).catch(fail);
 }
-export { height, signup, login, logout, userinfo };
+
+function uniqueCheck(body, success, fail) {
+  local.post(`/user/uniqueCheck`, body).then(success).catch(fail);
+}
+
+export { height, signup, login, logout, userinfo, uniqueCheck };
