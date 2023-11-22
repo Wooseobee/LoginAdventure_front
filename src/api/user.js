@@ -23,7 +23,7 @@ function userinfo(body, success, fail) {
 }
 
 function uniqueCheck(body, success, fail) {
-  local.post(`/user/uniqueCheck`, body).then(success).catch(fail);
+  local.post(`/user/checkId`, body).then(success).catch(fail);
 }
 
 export { height, signup, login, logout, userinfo, uniqueCheck };
