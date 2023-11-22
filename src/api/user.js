@@ -30,4 +30,8 @@ function modify(body, success, fail) {
   local.post(`/user/modify`, body).then(success).catch(fail);
 }
 
-export { height, signup, login, logout, userinfo, uniqueCheck, modify };
+async function reissue(body, success, fail) {
+  local.post(`/user/reissue`, body).then(success).catch(fail);
+}
+
+export { height, signup, login, logout, userinfo, uniqueCheck, modify, reissue };

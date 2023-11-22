@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { getCookie, deleteCookie } from "@/assets/js/util/cookie.js";
-import { height, signup, logout } from "@/api/user.js";
+import {getCookie, deleteCookie, setCookie} from "@/assets/js/util/cookie.js";
+import {height, signup, logout, reissue} from "@/api/user.js";
 
 export const useMemberStore = defineStore("member", () => {
   const id = ref("");
@@ -70,10 +70,53 @@ export const useMemberStore = defineStore("member", () => {
         isMyInfo.value = false;
       },
       (err) => {
-        console.log("err났슈");
+        console.log("err");
       }
     );
   };
+
+  const reissueToken = async () => {
+    let body;
+    if (!rememberMe.value) {
+      body = {
+        userid: sessionStorage.getItem('id'),
+        rtk: sessionStorage.getItem("rtk"),
+      }
+    } else {
+      body = {
+        userid: getCookie('id'),
+        rtk: getCookie("rtk"),
+      }
+    }
+    console.log("reissueToken")
+    return await reissue(
+        body,
+        ({data}) => {
+          if (!rememberMe.value) {
+            sessionStorage.setItem('atk', data.data.atk);
+          } else {
+            setCookie('atk', data.data.atk);
+          }
+          return true;
+        },
+        (err) => {
+          if (!rememberMe.value) {
+            sessionStorage.removeItem("id");
+            sessionStorage.removeItem("atk");
+            sessionStorage.removeItem("rtk");
+          } else {
+            deleteCookie("id");
+            deleteCookie("atk");
+            deleteCookie("rtk");
+          }
+          id.value = "";
+          isSearch.value = true;
+          isPlan.value = false;
+          isMyInfo.value = false;
+          return false;
+        }
+    )
+  }
 
   return {
     id,
@@ -88,5 +131,6 @@ export const useMemberStore = defineStore("member", () => {
     uuid,
     modulus,
     exponent,
+    reissueToken,
   };
 });

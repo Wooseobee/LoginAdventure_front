@@ -56,7 +56,12 @@ const getUserinfo = () => {
             email.value = data.data.email;
         },
         (err) => {
-            console.log(err);
+            if (err.response.data.code === 15) {
+                const res = userStore.reissueToken();
+                if (res) {
+                    getUserinfo();
+                }
+            }
         }
     )
 }
