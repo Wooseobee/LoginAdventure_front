@@ -14,7 +14,7 @@ function login(body, success, fail) {
   local.post(`/user/login`, body).then(success).catch(fail);
 }
 
-function logout(body, headers, success, fail) {
+function logout(body, success, fail) {
   local.post(`/user/logout`, body).then(success).catch(fail);
 }
 
@@ -38,4 +38,8 @@ async function reissue(body, success, fail) {
   local.post(`/user/reissue`, body).then(success).catch(fail);
 }
 
-export { height, signup, login, logout, userinfo, uniqueCheck, modify, reissue, uniqueCheckEmail };
+function goodbye(body, success, fail) {
+  local.post(`/user/goodbye`, body).then(success).catch(fail);
+}
+
+export { height, signup, login, logout, userinfo, uniqueCheck, modify, reissue, goodbye, uniqueCheckEmail };

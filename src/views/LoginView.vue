@@ -1,7 +1,7 @@
 <script setup>
   import { ref, watch } from 'vue';
-  import { setCookie } from '@/assets/js/util/cookie.js';
-  import { login, uniqueCheck, uniqueCheckEmail } from '@/api/user.js';
+  import {deleteCookie, getCookie, setCookie} from '@/assets/js/util/cookie.js';
+  import {login, logout, uniqueCheck, uniqueCheckEmail } from '@/api/user.js';
   import { useMemberStore } from '@/stores/member';
   import * as RSA from '@/assets/js/encrypt/rsa.js';
 
@@ -143,6 +143,8 @@
 
   const closeLoginBtn = () => {
     styleLoginModal.value.display = 'none';
+    loginId.value = '';
+    loginPw.value = '';
   };
 
   const styleSignupModal = ref({
@@ -233,16 +235,45 @@
     if (!userStore.id) {
       alert('로그인부터 해주세요.');
     } else {
-      console.log(userStore.id);
-      const body = {
-        userid: userStore.id,
-      };
-      const headers = {
-        Authorization: `Bearer ${sessionStorage.getItem('atk')}`,
-        'Content-Type': 'application/json',
-        userid: userStore.id,
-      };
-      userStore.logoutUser(body, headers);
+        let userid, atk;
+        if(!userStore.rememberMe) {
+            userid = sessionStorage.getItem("id");
+            atk = sessionStorage.getItem("atk");
+        } else {
+            userid = getCookie("id");
+            atk = getCookie("atk");
+        }
+        const body = {
+            userid: userid,
+            atk: atk,
+        }
+        logout(
+            body,
+            ({data}) => {
+                if (!userStore.rememberMe) {
+                    sessionStorage.removeItem("id");
+                    sessionStorage.removeItem("atk");
+                    sessionStorage.removeItem("rtk");
+                } else {
+                    deleteCookie("id");
+                    deleteCookie("atk");
+                    deleteCookie("rtk");
+                }
+                userStore.id = "";
+                userStore.isSearch = true;
+                userStore.isPlan = false;
+                userStore.isMyInfo = false;
+                userStore.rememberMe = false;
+            },
+            (err) => {
+                if (err.response.data.code === 15) {
+                    const res = userStore.reissueToken();
+                    if (res) {
+                        logoutUser();
+                    }
+                }
+            }
+        );
     }
   };
 
@@ -329,7 +360,7 @@
                 type="password"
                 placeholder="비밀번호"
               />
-              <input v-model="rememberMe" id="rememberMe" type="checkbox" /> 로그인 유지
+              <input v-model="userStore.rememberMe" id="rememberMe" type="checkbox" /> 로그인 유지
               <button @click="loginUser" id="login-btn" type="button">로그인</button>
               <a
                 href="https://kauth.kakao.com/oauth/authorize?client_id=0fcbc84f0fab706f3524ed52931c49d4&redirect_uri=http://localhost:8080/user/kakaologin&response_type=code"
