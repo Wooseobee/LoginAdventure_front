@@ -241,13 +241,13 @@ const encryptText = (text) => {
         <span @click="closeModifyBtn" id="closeModifyBtn" class="closeBtn">&times;</span>
         <div class="form">
           <form name="signuper-form" class="signuper-form">
-            <input v-model="curPw" @blur="pwCheck1" id="password1" name="password" type="password" placeholder="비밀번호" />
+            <input v-model="curPw" @blur="pwCheck1" id="password1" name="password" type="password" placeholder="기존 비밀번호" />
             <div v-show="!pwIsValid1" class="validity-info" id="validity-pw">
-                비밀번호: {{ pwMsg1 }}
+                기존 비밀번호: {{ pwMsg1 }}
             </div>
-            <input v-model="newPw" @blur="pwCheck2" id="password2" name="password" type="password" placeholder="비밀번호" />
+            <input v-model="newPw" @blur="pwCheck2" id="password2" name="password" type="password" placeholder="새로운 비밀번호" />
             <div v-show="!pwIsValid2" class="validity-info" id="validity-pw">
-                비밀번호확인: {{ pwMsg2 }}
+                새로운 비밀번호: {{ pwMsg2 }}
             </div>
             <button @click="modifyUser" id="Modify-submit" type="button">비밀번호 변경</button>
           </form>
