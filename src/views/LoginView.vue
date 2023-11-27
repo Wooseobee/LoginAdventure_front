@@ -46,8 +46,8 @@
             checkedId.value = id;
           },
           (err) => {
-            console.log('중복체크 실패');
-            console.log(err);
+            // console.log('중복체크 실패');
+            // console.log(err);
           }
         );
       } else {
@@ -105,7 +105,7 @@
         uniqueCheckEmail(
           body,
           ({ data }) => {
-            console.log('email check ok');
+            // console.log('email check ok');
             if (!data.data.available) {
               emailIsValid.value = false;
               emailMsg.value = '사용할 수 없는 이메일입니다. 다른 이메일을 입력해 주세요.';
@@ -113,8 +113,8 @@
             checkedEmail.value = email;
           },
           (err) => {
-            console.log('email 중복체크 실패');
-            console.log(err);
+            // console.log('email 중복체크 실패');
+            // console.log(err);
           }
         );
       } else {
@@ -210,12 +210,12 @@
         body,
         ({ data }) => {
           if (!userStore.rememberMe) {
-            console.log('로그인 유지X');
+            // console.log('로그인 유지X');
             sessionStorage.setItem('id', body.userid);
             sessionStorage.setItem('atk', data.data.atk);
             sessionStorage.setItem('rtk', data.data.rtk);
           } else {
-            console.log('로그인 유지O');
+            // console.log('로그인 유지O');
             setCookie('id', body.userid);
             setCookie('atk', data.data.atk);
             setCookie('rtk', data.data.rtk);
@@ -224,7 +224,7 @@
           closeLoginBtn();
         },
         (err) => {
-          console.log(err);
+          // console.log(err);
           alert('로그인 실패했습니다');
         }
       );
@@ -236,6 +236,7 @@
       alert('로그인부터 해주세요.');
     } else {
         let userid, atk;
+        console.log("여기?")
         if(!userStore.rememberMe) {
             userid = sessionStorage.getItem("id");
             atk = sessionStorage.getItem("atk");
@@ -247,6 +248,7 @@
             userid: userid,
             atk: atk,
         }
+        console.log(body);
         logout(
             body,
             ({data}) => {

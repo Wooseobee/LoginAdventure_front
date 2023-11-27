@@ -75,7 +75,6 @@ const dummyData = [
   { id: 1, title: '부산여행', userid: 'yyyy', content: '즐거운 여행~' },
 ];
 const onPlanClick = async (e) => {
-  console.log(e.currentTarget.id);
 
   const $planViewModal = document.getElementById('planViewModal');
   const $closePlanViewModalBtn = document.getElementById('closePlanViewModalBtn');
@@ -85,10 +84,8 @@ const onPlanClick = async (e) => {
   };
   let body = { sign: 'planView', contentid: e.currentTarget.id };
   body = JSON.stringify(body);
-  console.log(body);
   let retMsg = await fetch('main', { method: 'POST', body });
   let json = await retMsg.json();
-  console.log(json);
   const id = getCookie('id');
 
   if (id !== json.userid) {
@@ -128,7 +125,6 @@ const onPlanClick = async (e) => {
   $planRegistBtn.addEventListener('click', async (e) => {
     let body = { sign: 'planDelete', contentid: e.currentTarget.name };
     body = JSON.stringify(body);
-    console.log(body);
 
     let retMsg = await fetch('main', { method: 'POST', body });
 
@@ -189,7 +185,6 @@ export default function detectNavChange() {
     $searchPlaceBtn.classList.remove('navSelected');
     let body = { sign: 'planList' };
     body = JSON.stringify(body);
-    console.log(body);
     let retMsg = await fetch('main', { method: 'POST', body });
     let json = await retMsg.json();
 

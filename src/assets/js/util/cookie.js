@@ -12,7 +12,7 @@ export function getCookie(cookieName) {
     cookieValue = cookieData.substring(start, end);
   }
 
-  return unescape(cookieValue);
+  return decodeURI(cookieValue);
 }
 
 export function setCookie(name, value, options = {}) {

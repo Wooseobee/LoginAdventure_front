@@ -29,7 +29,6 @@ function myPlanClick() {
   userStore.isMyInfo = false;
   // let body = { sign: "planList" };
   // body = JSON.stringify(body);
-  // console.log(body);
   // let retMsg = await fetch("main", { method: "POST", body });
   // let json = await retMsg.json();
 

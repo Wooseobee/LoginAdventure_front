@@ -15,7 +15,6 @@ function addOption(selid, data) {
       case "gugun":
        
           let guguns = data.response.body.items.item;
-          console.log(guguns,2523859)
           opt += `<option value="">구군선택</option>`;
           guguns.forEach(function (area) {
             opt += `

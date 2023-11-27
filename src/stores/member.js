@@ -31,7 +31,6 @@ export const useMemberStore = defineStore("member", () => {
                 exponent.value = data.data.exponent;
             },
             (err) => {
-                console.log(err);
             }
         );
     };
@@ -40,10 +39,8 @@ export const useMemberStore = defineStore("member", () => {
         signup(
             body,
             ({data}) => {
-                console.log(data);
             },
             (err) => {
-                console.log(err);
             }
         );
     };
@@ -61,7 +58,6 @@ export const useMemberStore = defineStore("member", () => {
                 rtk: getCookie("rtk"),
             }
         }
-        console.log("reissueToken")
         return await reissue(
             body,
             ({data}) => {

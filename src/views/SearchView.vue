@@ -12,7 +12,6 @@ onMounted(async () => {
 
 async function selectSido() {
     guguns.value = await fetchGugun(selectedSido.value);
-    console.log("hello")
 }
 
 </script>

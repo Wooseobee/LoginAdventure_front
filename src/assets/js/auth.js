@@ -1,7 +1,6 @@
 const $signupBtn = document.getElementById("signup");
 const $signupModal = document.getElementById("signupModal");
 const $closeSignupBtn = document.getElementById("closeSignupBtn");
-console.log($signupBtn);
 
 $signupBtn.onclick = function () {
   $signupModal.style.display = "block";
@@ -10,8 +9,6 @@ $signupBtn.onclick = function () {
 const $regist = document.getElementById("signup-submit");
 
 $regist.onclick = async () => {
-  console.log(234);
-  console.log("regist");
 
   // 문서에서 id 로 input data 가져오기
   let id = document.getElementById("id").value;
@@ -24,8 +21,6 @@ $regist.onclick = async () => {
     alert("빈칸이 없도록 입력해주세요.");
   } else {
     let body = { userid: id, userpassword: password, username: name, rrn };
-    // body = JSON.stringify(body);
-    console.log(body);
     body = JSON.stringify(body);
 
     let retMsg = await fetch("member/signup", {
@@ -71,14 +66,12 @@ document.querySelector("#login-btn").addEventListener("click", async function ()
 
   let body = { userid: id, userpassword: pwd };
   body = JSON.stringify(body);
-  console.log(body);
   let retMsg = await fetch("member/login", {
     method: "POST",
     credentials: "include",
     body,
     headers: { "Content-Type": "application/json" },
   });
-  console.log(retMsg);
   retMsg = await retMsg.json();
   if (retMsg.msg == "로그인 성공") {
     // location.reload();
